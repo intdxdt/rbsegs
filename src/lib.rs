@@ -4,7 +4,7 @@ extern crate float_eq;
 mod seg;
 mod brutelist;
 mod event;
-mod bruteforce;
+pub mod bruteforce;
 
 use bruteforce::brute_force;
 use brutelist::{new_brute_force_list, add_segment, BrutForceList};
