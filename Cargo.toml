@@ -1,5 +1,5 @@
 [package]
-name = "redblue_segs"
+name = "rbsegs"
 version = "0.1.0"
 authors = ["Titus Tienaah <titus.intdxdt@gmail.com>"]
 
