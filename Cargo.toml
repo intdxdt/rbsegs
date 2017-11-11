@@ -3,6 +3,9 @@ name = "redblue_segs"
 version = "0.1.0"
 authors = ["Titus Tienaah <titus.intdxdt@gmail.com>"]
 
+[dev-dependencies]
+rand = "0.3.15"
+
 [dependencies]
 float_eq = { git = "https://github.com/intdxdt/float_eq", branch = "master" }
 mbr = { git = "https://github.com/intdxdt/mbr-rs", branch = "master" }
