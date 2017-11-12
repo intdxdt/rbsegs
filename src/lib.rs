@@ -10,7 +10,7 @@ use bruteforce::brute_force;
 use brutelist::{new_brute_force_list, add_segment, BrutForceList};
 use event::{prepare_events, CREATE_RED, CREATE_BLUE, REMOVE_RED, REMOVE_BLUE};
 
-fn rb_intersection(red: &[Vec<Vec<f64>>], blue: &[Vec<Vec<f64>>]) -> Vec<Vec<usize>> {
+pub fn rb_intersection(red: &[Vec<Vec<f64>>], blue: &[Vec<Vec<f64>>]) -> Vec<Vec<usize>> {
     let mut crossings: Vec<Vec<usize>> = Vec::new();
     {
         let mut visit = |i: usize, j: usize| -> bool {
@@ -23,7 +23,7 @@ fn rb_intersection(red: &[Vec<Vec<f64>>], blue: &[Vec<Vec<f64>>]) -> Vec<Vec<usi
 }
 
 
-fn red_blue_line_segment_intersection(red: &[Vec<Vec<f64>>], blue: &[Vec<Vec<f64>>],
+pub fn red_blue_line_segment_intersection(red: &[Vec<Vec<f64>>], blue: &[Vec<Vec<f64>>],
                                       visit: &mut FnMut(usize, usize) -> bool) -> bool {
     let nr = (red).len();
     let nb = (blue).len();
