@@ -30,7 +30,6 @@ fn convert_f64vec(array: Vec<Vec<[f64; 2]>>) -> Vec<Vec<Vec<f64>>> {
     res
 }
 
-
 fn clipper_to_graph(loops: &Vec<Vec<Vec<f64>>>) -> Vec<Vec<Vec<f64>>> {
     let mut edges: Vec<Vec<Vec<f64>>> = Vec::new();
     for i in 0..(loops).len() {
@@ -125,11 +124,8 @@ fn init() -> Vec<Case> {
     cases
 }
 
-
 const NUM_ITER:usize = 100;
 const WARM_UP :usize = 10;
-
-
 
 fn benchmark(red:&Vec<Vec<Vec<f64>>>, blue:&Vec<Vec<Vec<f64>>>,
              algo: &Fn( &[Vec<Vec<f64>>],  &[Vec<Vec<f64>>]) -> Vec<Vec<usize>>) ->Vec<f64>{
