@@ -1,6 +1,7 @@
 extern crate rand;
 extern crate time;
 extern crate rbsegs;
+
 use self::rand::random;
 use time::PreciseTime;
 use rbsegs::{rb_intersection, brute_force};
@@ -22,8 +23,7 @@ fn convert_f64vec(array: Vec<Vec<[f64; 2]>>) -> Vec<Vec<Vec<f64>>> {
         let v = &array[i];
 
         for j in 0..v.len() {
-            let o = &v[j];
-            ln.push(vec![o[0], o[1]])
+            ln.push(vec![v[j][0], v[j][1]])
         }
         res.push(ln);
     }
@@ -38,7 +38,7 @@ fn clipper_to_graph(loops: &Vec<Vec<Vec<f64>>>) -> Vec<Vec<Vec<f64>>> {
             let a = &lp[j];
             let b = &lp[(j + 1) % lp.len()];
             if a[0] == b[0] && a[1] == b[1] {
-                continue
+                continue;
             }
             edges.push(vec![vec![a[0], a[1]], vec![b[0], b[1]]]);
         }
@@ -48,11 +48,6 @@ fn clipper_to_graph(loops: &Vec<Vec<Vec<f64>>>) -> Vec<Vec<Vec<f64>>> {
 
 fn init() -> Vec<Case> {
     let mut cases: Vec<Case> = Vec::new();
-//    let mut gb_poly: Vec<Vec<Vec<f64>>> = Vec::new();
-//    let mut arrow_poly: Vec<Vec<Vec<f64>>> = Vec::new();
-//    let mut phantom_poly: Vec<Vec<Vec<f64>>> = Vec::new();
-//    let mut skull_poly: Vec<Vec<Vec<f64>>> = Vec::new();
-
     for i in 1..3 {
         for j in 1..(i + 1) {
             let nr = 10f64.powi(i);
@@ -69,8 +64,8 @@ fn init() -> Vec<Case> {
 
             cases.push(Case {
                 name: format!("Random, red: {}, blue: {}", nr, nb).to_string(),
-                red: red,
-                blue: blue,
+                red,
+                blue,
             })
         }
     }
@@ -114,7 +109,7 @@ fn init() -> Vec<Case> {
         vec![[421.16, 64.34], [421.16, 64.45], [422.7, 96.81], [424.28, 149.29], [425.26, 216.18], [425.57, 327.02], [220.65, 327.02], [220.41, 312.05], [219.69, 230.46], [219.9, 144.66], [221.01, 65.92], [233.74, 65.34], [264.63, 64.78], [325.38, 65.31], [363.93, 65.31], [393.46, 64.48], [420.05, 62.8], [420.8, 62.92], [421.16, 64.34]],
         vec![[404.57, 215.13], [404.58, 215.08], [405.83, 205.87], [406.55, 194.49], [406.3, 183.7], [405.16, 173.57], [403.17, 164.03], [400.34, 155.01], [396.73, 146.61], [392.34, 138.76], [387.23, 131.54], [381.47, 125.02], [375.05, 119.16], [368.04, 114.01], [360.39, 109.58], [352.3, 105.99], [343.88, 103.28], [335.22, 101.47], [326.42, 100.59], [317.57, 100.64], [308.77, 101.63], [300.3, 103.53], [292.06, 106.33], [284.32, 109.94], [277.01, 114.36], [270.11, 119.65], [263.83, 125.67], [258.83, 131.66], [253.44, 139.77], [248.35, 149.13], [244.11, 158.88], [241.0, 168.28], [239.0, 177.21], [238.09, 185.4], [238.17, 192.9], [239.13, 199.57], [240.91, 205.61], [243.45, 211.04], [246.09, 214.67], [249.63, 217.9], [254.56, 221.04], [270.07, 228.23], [275.76, 231.57], [279.77, 234.93], [282.82, 238.64], [285.08, 242.87], [286.61, 247.72], [287.31, 253.67], [287.19, 274.82], [287.8, 281.39], [288.94, 285.57], [290.57, 288.43], [292.56, 290.24], [295.1, 291.3], [295.83, 283.75], [296.0, 265.6], [296.31, 250.76], [297.29, 241.67], [299.29, 240.75], [303.08, 239.94], [307.26, 240.0], [307.66, 242.7], [309.02, 256.43], [310.57, 291.19], [311.49, 291.54], [314.95, 293.31], [316.6, 294.82], [316.6, 295.52], [315.35, 295.94], [315.99, 296.02], [317.2, 295.47], [318.2, 293.99], [319.04, 290.81], [319.39, 284.37], [318.41, 262.35], [318.37, 251.85], [319.08, 245.75], [320.27, 242.05], [321.29, 240.77], [323.08, 240.08], [328.27, 240.0], [329.31, 244.13], [330.19, 252.03], [330.63, 273.92], [331.25, 284.25], [332.33, 289.99], [333.7, 293.31], [335.26, 295.12], [337.01, 295.94], [337.81, 294.94], [339.33, 291.52], [340.32, 286.68], [340.61, 279.64], [339.38, 260.18], [339.31, 251.49], [340.05, 245.84], [341.39, 241.87], [342.36, 240.75], [344.31, 240.04], [351.49, 240.0], [351.67, 240.9], [352.45, 248.35], [352.58, 274.14], [353.27, 282.2], [354.5, 287.31], [356.13, 290.68], [358.13, 292.86], [359.27, 289.89], [360.62, 284.2], [361.32, 276.58], [361.16, 258.89], [361.45, 247.8], [365.47, 242.21], [370.89, 236.4], [377.72, 230.54], [385.94, 224.78], [395.31, 219.41], [404.57, 215.13]],
     ];
-    let  skull_poly: Vec<Vec<Vec<f64>>> = convert_f64vec(skull_poly);
+    let skull_poly: Vec<Vec<Vec<f64>>> = convert_f64vec(skull_poly);
 
     cases.push(Case {
         name: "Phantom and Skull".to_string(),
@@ -124,40 +119,41 @@ fn init() -> Vec<Case> {
     cases
 }
 
-const NUM_ITER:usize = 100;
-const WARM_UP :usize = 10;
+const NUM_ITER: usize = 100;
+const WARM_UP: usize = 10;
 
-fn benchmark(red:&Vec<Vec<Vec<f64>>>, blue:&Vec<Vec<Vec<f64>>>,
-             algo: &Fn( &[Vec<Vec<f64>>],  &[Vec<Vec<f64>>]) -> Vec<Vec<usize>>) ->Vec<f64>{
-	for _ in  0.. WARM_UP{
-		algo(red, blue);
-	}
+fn benchmark(red: &Vec<Vec<Vec<f64>>>, blue: &Vec<Vec<Vec<f64>>>,
+             algo: &Fn(&[Vec<Vec<f64>>], &[Vec<Vec<f64>>]) -> Vec<Vec<usize>>) -> Vec<f64> {
+    for _ in 0..WARM_UP {
+        algo(red, blue);
+    }
 
-	let start = PreciseTime::now();
-	let mut count = 0;
+    let start = PreciseTime::now();
+    let mut count = 0;
 
-	for _  in  0.. NUM_ITER {
-		let result = algo(red, blue);
-		count += result.len()
-	}
-	let  end = PreciseTime::now();
+    for _ in 0..NUM_ITER {
+        let result = algo(red, blue);
+        count += result.len()
+    }
+    let end = PreciseTime::now();
 //    time::Duration::seconds()
-	return vec![ (start.to(end).num_milliseconds()) as f64 / (NUM_ITER as f64), (count as f64)]
+    let d = (start.to(end).num_nanoseconds().unwrap() as f64 * 1e-6) / (NUM_ITER as f64);
+    return vec![d, (count as f64)];
 }
 
 
 fn main() {
     let cases = init();
 
-    println!("testing {} {}",  "Brute-force" , "...");
-    for j  in 0..cases.len() {
+    println!("\ntesting {} {}", "Brute-force", "...\n");
+    for j in 0..cases.len() {
         println!("case: {}", cases[j].name);
         let res = benchmark(&cases[j].red, &cases[j].blue, &brute_force);
         println!("\ttime: {} ms - total isect: {}", res[0], res[1])
     }
     //------------------------------------------------------------------------------------
-    println!("testing {} {}",  "RBLSI" , "...");
-    for j  in 0..cases.len() {
+    println!("\ntesting {} {}", "RBLSI", "...\n");
+    for j in 0..cases.len() {
         println!("case: {}", cases[j].name);
         let res = benchmark(&cases[j].red, &cases[j].blue, &rb_intersection);
         println!("\ttime: {} ms - total isect: {}", res[0], res[1])

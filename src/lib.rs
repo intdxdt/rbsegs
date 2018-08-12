@@ -6,7 +6,7 @@ mod brutelist;
 mod event;
 
 use seg::intersects;
-use brutelist::{new_brute_force_list, add_segment, BrutForceList};
+use brutelist::{new_brute_force_list, add_segment};
 use event::{prepare_events, CREATE_RED, CREATE_BLUE, REMOVE_RED, REMOVE_BLUE};
 
 pub fn rb_intersection(red: &[Vec<Vec<f64>>], blue: &[Vec<Vec<f64>>]) -> Vec<Vec<usize>> {
@@ -132,7 +132,7 @@ mod tests {
     fn edge_case() {
         let red = [vec![vec![224.0, 328.0], vec![224.0, 331.0]]];
         let blue = [vec![vec![224.0, 146.0], vec![224.0, 330.0]]];
-        let mut visit = |r: usize, b: usize| -> bool{
+        let mut visit = |_: usize, _: usize| -> bool{
             assert!(true);
             false
         };
@@ -145,12 +145,12 @@ mod tests {
         for j in 0..20 {
             println!("# fuzz test {} {}", j + 1, " ...");
             let mut red: Vec<Vec<Vec<f64>>> = Vec::new();
-            for i in 0..(10 * (j + 1)) {
+            for _ in 0..(10 * (j + 1)) {
                 red.push(vec![vec![rnd(), rnd()], vec![rnd(), rnd()]]);
             }
 
             let mut blue: Vec<Vec<Vec<f64>>> = Vec::new();
-            for i in 0..(10 * (j + 1)) {
+            for _ in 0..(10 * (j + 1)) {
                 blue.push(vec![vec![rnd(), rnd()], vec![rnd(), rnd()]]);
             }
 
