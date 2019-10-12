@@ -23,7 +23,7 @@ pub fn rb_intersection(red: &[Vec<Vec<f64>>], blue: &[Vec<Vec<f64>>]) -> Vec<Vec
 
 
 pub fn red_blue_line_segment_intersection(red: &[Vec<Vec<f64>>], blue: &[Vec<Vec<f64>>],
-                                          visit: &mut FnMut(usize, usize) -> bool) -> bool {
+                                          visit: &mut dyn FnMut(usize, usize) -> bool) -> bool {
     let nr = (red).len();
     let nb = (blue).len();
     let n = nr + nb;

@@ -112,9 +112,9 @@ fn init() -> Vec<Case> {
     let skull_poly: Vec<Vec<Vec<f64>>> = convert_f64vec(skull_poly);
 
     cases.push(Case {
-        name: "Phantom and Skull".to_string(),
-        red: clipper_to_graph(&phantom_poly),
-        blue: clipper_to_graph(&skull_poly),
+        name:   "Phantom and Skull".to_string(),
+        red:    clipper_to_graph(&phantom_poly),
+        blue:   clipper_to_graph(&skull_poly),
     });
     cases
 }
@@ -143,6 +143,7 @@ fn benchmark(red: &Vec<Vec<Vec<f64>>>, blue: &Vec<Vec<Vec<f64>>>,
 
 
 fn main() {
+
     let cases = init();
 
     println!("\ntesting {} {}", "Brute-force", "...\n");

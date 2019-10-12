@@ -1,10 +1,9 @@
-
 use seg::intersects;
 
 pub struct BrutForceList {
     pub intervals: Vec<f64>,
     pub index: Vec<usize>,
-    pub count: usize
+    pub count: usize,
 }
 
 impl BrutForceList {
@@ -16,7 +15,7 @@ impl BrutForceList {
         self.count += 1;
     }
 
-   pub fn remove(&mut self, index: usize) {
+    pub fn remove(&mut self, index: usize) {
         let count = self.count;
         for i in (0..count).rev() {
             if self.index[i] == index {
@@ -34,16 +33,19 @@ pub fn new_brute_force_list(capacity: usize) -> BrutForceList {
     BrutForceList {
         intervals: vec![0.0; 2 * capacity],
         index: vec![0; capacity],
-        count: 0
+        count: 0,
     }
 }
 
 
 //add_segment(index, red, red_list, blue, blue_list, visit, false)
 //red: &[Vec<Vec<f64>>], blue: &[Vec<Vec<f64>>]
-pub fn add_segment(index: usize, red: &[Vec<Vec<f64>>],
-               red_list: &mut BrutForceList, blue: &[Vec<Vec<f64>>], blue_list: &mut BrutForceList,
-               visit: &mut FnMut(usize, usize) -> bool, flip: bool) -> bool {
+pub fn add_segment(index: usize,
+                   red: &[Vec<Vec<f64>>],
+                   red_list: &mut BrutForceList,
+                   blue: &[Vec<Vec<f64>>],
+                   blue_list: &mut BrutForceList,
+                   visit: &mut dyn FnMut(usize, usize) -> bool, flip: bool) -> bool {
     //Look up segment
     let seg = &red[index];
 
